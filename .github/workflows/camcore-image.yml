@@ -19,7 +19,7 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: camcoreau/seerr
+  IMAGE_NAME: team-camcore/seerr
 
 jobs:
   validate:
