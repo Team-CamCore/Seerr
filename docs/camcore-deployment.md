@@ -3,7 +3,7 @@
 This fork publishes the CamCore-branded Cameron-Media Requests image to:
 
 ```text
-ghcr.io/camcoreau/seerr:latest
+ghcr.io/team-camcore/seerr:latest
 ```
 
 The CamCore production image is built for `linux/amd64`.
@@ -15,9 +15,9 @@ A push to `develop` does not publish the CamCore image until the fork has passed
 Published tags include:
 
 ```text
-ghcr.io/camcoreau/seerr:latest
-ghcr.io/camcoreau/seerr:camcore
-ghcr.io/camcoreau/seerr:develop-<sha>
+ghcr.io/team-camcore/seerr:latest
+ghcr.io/team-camcore/seerr:camcore
+ghcr.io/team-camcore/seerr:develop-<sha>
 ```
 
 The SHA tag provides an immutable rollback target for each successful build.
@@ -57,7 +57,7 @@ Keep the current service definition and change only the `image` value when movin
 ```yaml
 services:
   seerr:
-    image: ghcr.io/camcoreau/seerr:latest
+    image: ghcr.io/team-camcore/seerr:latest
     init: true
     container_name: seerr
     restart: unless-stopped
@@ -91,7 +91,7 @@ When updating through Synology Container Manager:
 
 1. Confirm the existing container's volume mapping to `/app/config`.
 2. Back up the mapped host folder.
-3. Change the image to the required `ghcr.io/camcoreau/seerr` tag.
+3. Change the image to the required `ghcr.io/team-camcore/seerr` tag.
 4. Keep the existing container name, ports, environment variables, network and volume mappings.
 5. Recreate or update the container.
 6. Confirm that the application opens and existing requests, users and integrations are present.
@@ -106,7 +106,7 @@ Cameron-Media Requests uses the CamCore application sender standard:
 | --- | --- |
 | Sender name | `Requests | CamCore Media` |
 | From address | `help@camcore.au` |
-| Full From identity | `Requests | CamCore Media <help@camcore.au>` |
+| Full From identity | `Requests \| CamCore Media <help@camcore.au>` |
 | SMTP host | `192.168.5.101` |
 | SMTP port | `25` |
 | Encryption | None on the private CamCore LAN |
@@ -157,7 +157,7 @@ After deployment, confirm:
 Prefer an immutable CamCore SHA tag when rolling back the application image:
 
 ```text
-ghcr.io/camcoreau/seerr:develop-<sha>
+ghcr.io/team-camcore/seerr:develop-<sha>
 ```
 
 To roll back without losing configuration:
