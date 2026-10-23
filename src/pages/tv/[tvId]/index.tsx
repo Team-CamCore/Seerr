@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<TvPageProps> = async (
   ctx
 ) => {
   const response = await axios.get<TvDetailsType>(
-    `http://${getHostAndPort()}/api/v1/tv/${ctx.query.tvId}`,
+    `http://${getHostAndPort()}/api/v1/tv/${encodeURIComponent(String(ctx.query.tvId))}`,
     {
       headers: ctx.req?.headers?.cookie
         ? { cookie: ctx.req.headers.cookie }
