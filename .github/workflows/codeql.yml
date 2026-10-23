@@ -47,6 +47,13 @@ jobs:
             with:
               languages: ${{ matrix.language }}
               queries: +security-and-quality
+              # Inline (not config-file) because init runs in parallel with
+              # checkout. Test files are not shipped and only add noise.
+              config: |
+                paths-ignore:
+                  - '**/*.test.ts'
+                  - '**/*.test.tsx'
+                  - 'cypress/**'
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v4.37.9

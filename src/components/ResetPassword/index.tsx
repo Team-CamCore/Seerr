@@ -101,7 +101,7 @@ const ResetPassword = () => {
                 validationSchema={ResetSchema}
                 onSubmit={async (values) => {
                   const response = await axios.post(
-                    `/api/v1/auth/reset-password/${guid}`,
+                    `/api/v1/auth/reset-password/${encodeURIComponent(String(guid))}`,
                     {
                       password: values.password,
                     }
