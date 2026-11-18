@@ -128,7 +128,7 @@ jobs:
           labels: |
             org.opencontainers.image.title=CamCore Cameron-Media Requests
             org.opencontainers.image.description=CamCore-branded Seerr image for Cameron-Media Requests
-            org.opencontainers.image.source=https://github.com/camcoreau/Seerr
+            org.opencontainers.image.source=https://github.com/Team-CamCore/Seerr
 
       - name: Build and publish image
         uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0

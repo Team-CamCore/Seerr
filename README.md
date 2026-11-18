@@ -35,7 +35,7 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | --- | --- |
 | Service | Cameron-Media Requests |
 | Public URL | `https://requests.camcore.au` |
-| Container | `ghcr.io/camcoreau/seerr` |
+| Container | `ghcr.io/team-camcore/seerr` |
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
 | Support | `https://camcore.au/support` |
 | Help Centre | `https://camcore.au/help` |
@@ -64,11 +64,11 @@ Seerr email has been brought into the same communication system used by CamCore 
 All Cameron-Media Requests email templates use a common shared layout with:
 
 - the dark CamCore brand header;
-- cyan brand divider;
+- Core Coral brand divider;
 - `CAMCORE MEDIA • REQUESTS` service labelling;
 - event/status badges;
 - structured light detail panels;
-- cyan primary actions;
+- Accessible Coral primary actions;
 - CamCore Help centre, CamCore Status and support contact details;
 - clear notification subjects without a redundant brand prefix.
 
@@ -89,9 +89,9 @@ See [CamCore Deployment](./docs/camcore-deployment.md) for the SMTP and validati
 Successful CamCore builds publish:
 
 ```text
-ghcr.io/camcoreau/seerr:latest
-ghcr.io/camcoreau/seerr:camcore
-ghcr.io/camcoreau/seerr:develop-<sha>
+ghcr.io/team-camcore/seerr:latest
+ghcr.io/team-camcore/seerr:camcore
+ghcr.io/team-camcore/seerr:develop-<sha>
 ```
 
 The CamCore production image is built for:
@@ -121,7 +121,7 @@ See [CamCore Deployment](./docs/camcore-deployment.md) for the full deployment, 
 ```yaml
 services:
   seerr:
-    image: ghcr.io/camcoreau/seerr:latest
+    image: ghcr.io/team-camcore/seerr:latest
     init: true
     container_name: seerr
     restart: unless-stopped

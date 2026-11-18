@@ -123,7 +123,7 @@ The CamCore fork also provides branded HTML templates for:
 - password reset;
 - email test notifications.
 
-The email design follows the same communication system used by CamCore Operations support messages: a dark CamCore header, cyan divider, service label, event badge, white content area, structured detail panels, cyan primary action and CamCore footer links.
+The email design follows the same communication system used by CamCore Operations support messages: a dark CamCore header, Core Coral divider, service label, event badge, white content area, structured detail panels, Accessible Coral primary action and CamCore footer links.
 
 After changing email settings, send a test notification and confirm:
 
