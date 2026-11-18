@@ -2,31 +2,31 @@ include ../_partials/camcore.pug
 
 +camcoreEmail('CAMCORE MEDIA • REQUESTS', event, heading)
   +camcoreGreeting(recipientName, recipientEmail, applicationTitle)
-  p(style='margin: 14px 0 0; color: #435562; font-size: 15px; line-height: 24px;')
+  p(style='margin: 14px 0 0; color: #667180; font-size: 15px; line-height: 24px;')
     | #{body}
 
   if issueComment
     +camcorePanel('Latest comment')
-      div(style='color: #243843; font-size: 14px; line-height: 22px; white-space: pre-wrap;')
+      div(style='color: #101720; font-size: 14px; line-height: 22px; white-space: pre-wrap;')
         | #{issueComment}
   else if issueDescription
     +camcorePanel('Issue details')
-      div(style='color: #243843; font-size: 14px; line-height: 22px; white-space: pre-wrap;')
+      div(style='color: #101720; font-size: 14px; line-height: 22px; white-space: pre-wrap;')
         | #{issueDescription}
 
   +camcorePanel('Media')
     table(role='presentation' cellpadding='0' cellspacing='0' border='0' width='100%')
       tr
         td(style='vertical-align: top; padding-right: 16px;')
-          div(style='color: #071827; font-size: 21px; line-height: 27px; font-weight: 800;')
+          div(style='color: #101720; font-size: 21px; line-height: 27px; font-weight: 800;')
             | #{mediaName}
           if extra && extra.length
-            div(style='margin-top: 10px; color: #526572; font-size: 13px; line-height: 20px;')
+            div(style='margin-top: 10px; color: #667180; font-size: 13px; line-height: 20px;')
               each item in extra
                 span(style='display: block; margin-top: 3px;')
-                  strong(style='color: #718391; font-weight: 750;') #{item.name}&nbsp;
+                  strong(style='color: #667180; font-weight: 750;') #{item.name}&nbsp;
                   | #{item.value}
-          div(style='margin-top: 8px; color: #81919b; font-size: 12px; line-height: 18px;')
+          div(style='margin-top: 8px; color: #667180; font-size: 12px; line-height: 18px;')
             | #{timestamp}
         if imageUrl
           td.camcore-poster(width='104' style='width: 104px; vertical-align: top;')
@@ -40,6 +40,6 @@ include ../_partials/camcore.pug
 
   table(role='presentation' cellpadding='0' cellspacing='0' border='0' width='100%' style='margin: 26px 0 0;')
     tr
-      td(style='padding: 15px 17px; background-color: #f8fafb; border-left: 3px solid #12c4de; color: #435562; font-size: 13px; line-height: 20px;')
-        div(style='color: #10212b; font-weight: 750;') Keep the issue up to date
+      td(style='padding: 15px 17px; background-color: #F4F6F8; border-left: 3px solid #FF4B2B; color: #667180; font-size: 13px; line-height: 20px;')
+        div(style='color: #101720; font-weight: 750;') Keep the issue up to date
         div(style='margin-top: 3px;') Open the issue to review its current status, read the latest comments or add more information if needed.

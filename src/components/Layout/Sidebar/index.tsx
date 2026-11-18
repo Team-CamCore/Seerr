@@ -1,4 +1,3 @@
-import Badge from '@app/components/Common/Badge';
 import VersionStatus from '@app/components/Layout/VersionStatus';
 import useClickOutside from '@app/hooks/useClickOutside';
 import { Permission, useUser } from '@app/hooks/useUser';
@@ -14,6 +13,7 @@ import {
   HomeIcon,
   LifebuoyIcon,
   PlayCircleIcon,
+  QuestionMarkCircleIcon,
   SignalIcon,
   SparklesIcon,
   TvIcon,
@@ -129,33 +129,88 @@ const SidebarLinks: SidebarLinkProps[] = [
   },
 ];
 
+// CamCore service links. Labels follow the CamCore Brand Guidelines
+// (OPS-A-74): sentence case, with proper names keeping their capitalisation.
+// Targets are the canonical camcore.au entry points (OPS-A-127).
 const CamCoreLinks: CamCoreLinkProps[] = [
   {
     href: 'https://camcore.au',
-    label: 'CamCore Home',
-    svgIcon: <HomeIcon className="mr-3 h-5 w-5" />,
+    label: 'CamCore home',
+    svgIcon: <HomeIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://camcore.au/help-centre.html',
-    label: 'Help Centre',
-    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/help',
+    label: 'Help centre',
+    svgIcon: <QuestionMarkCircleIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://status.camcore.au',
-    label: 'Service Status',
-    svgIcon: <SignalIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/status',
+    label: 'CamCore Status',
+    svgIcon: <SignalIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
     href: 'https://plex.camcore.au',
     label: 'Cameron-Media',
-    svgIcon: <PlayCircleIcon className="mr-3 h-5 w-5" />,
+    svgIcon: <PlayCircleIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://camcore.au/support.html',
-    label: 'Support Request',
-    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/support',
+    label: 'Support',
+    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
 ];
+
+// Pending request and open issue counts. Core Coral marks the count on idle
+// items; on the active (coral) item it inverts to Deep Core to keep contrast.
+const CountBadge = ({
+  active,
+  children,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+}) => (
+  <span
+    className={`inline-flex whitespace-nowrap rounded-md px-2 text-xs font-semibold leading-5 ${
+      active
+        ? 'bg-camcore-deep-core text-white'
+        : 'bg-camcore-coral text-camcore-deep-core'
+    }`}
+  >
+    {children}
+  </span>
+);
+
+const CamCoreLinkSection = ({ onNavigate }: { onNavigate?: () => void }) => (
+  <div className="mt-7 border-t border-white/10 pt-5">
+    <h2
+      id="camcore-links-heading"
+      className="mb-3 px-3 text-sm font-semibold text-camcore-coral-light"
+    >
+      CamCore
+    </h2>
+    <ul aria-labelledby="camcore-links-heading" className="space-y-1.5">
+      {CamCoreLinks.map((camCoreLink) => (
+        <li key={camCoreLink.href}>
+          <a
+            href={camCoreLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onNavigate}
+            className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-100 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:outline-none focus-visible:bg-white/10 focus-visible:ring-2 focus-visible:ring-camcore-coral"
+          >
+            {camCoreLink.svgIcon}
+            <span>{camCoreLink.label}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+            <ArrowTopRightOnSquareIcon
+              className="ml-auto h-4 w-4 flex-shrink-0 text-slate-300"
+              aria-hidden="true"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const Sidebar = ({
   open,
@@ -214,10 +269,7 @@ const Sidebar = ({
               leaveTo="-translate-x-full"
             >
               <>
-                <div
-                  className="sidebar relative flex h-full w-full max-w-xs flex-1 flex-col border-r border-cyan-300/10"
-                  style={{ backgroundColor: '#07162f' }}
-                >
+                <div className="sidebar relative flex h-full w-full max-w-xs flex-1 flex-col border-r border-white/10 bg-camcore-deep-core">
                   <div className="sidebar-close-button absolute right-0 -mr-14 p-1">
                     <button
                       className="flex h-12 w-12 items-center justify-center rounded-full focus:bg-white/10 focus:outline-none"
@@ -260,10 +312,10 @@ const Sidebar = ({
                               }}
                               role="button"
                               tabIndex={0}
-                              className={`flex items-center rounded-lg px-3 py-2 text-base font-medium leading-6 transition duration-150 ease-in-out focus:outline-none ${
+                              className={`flex items-center rounded-lg px-3 py-2 text-base font-medium leading-6 transition duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                                 router.pathname.match(sidebarLink.activeRegExp)
-                                  ? 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/30 hover:from-sky-400 hover:to-cyan-400'
-                                  : 'text-slate-100 hover:bg-white/10 focus:bg-white/10'
+                                  ? 'bg-camcore-coral font-semibold text-camcore-deep-core hover:bg-camcore-coral-light'
+                                  : 'text-slate-100 hover:bg-white/10 focus-visible:bg-white/10'
                               } `}
                               data-testid={`${sidebarLink.dataTestId}-mobile`}
                             >
@@ -276,27 +328,7 @@ const Sidebar = ({
                         })}
                       </div>
 
-                      <div className="mt-7 border-t border-white/10 pt-5">
-                        <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.18em] text-camcore-coral-light">
-                          CamCore
-                        </p>
-                        <div className="space-y-1.5">
-                          {CamCoreLinks.map((camCoreLink) => (
-                            <a
-                              key={`mobile-${camCoreLink.label}`}
-                              href={camCoreLink.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => setClosed()}
-                              className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-200 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none"
-                            >
-                              {camCoreLink.svgIcon}
-                              <span>{camCoreLink.label}</span>
-                              <ArrowTopRightOnSquareIcon className="ml-auto h-4 w-4 text-slate-400" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                      <CamCoreLinkSection onNavigate={() => setClosed()} />
                     </nav>
                     {hasPermission(Permission.ADMIN) && (
                       <div className="px-2 pt-4">
@@ -315,10 +347,7 @@ const Sidebar = ({
       </div>
 
       <div className="fixed bottom-0 left-0 top-0 z-30 hidden lg:flex lg:flex-shrink-0">
-        <div
-          className="sidebar flex w-64 flex-col border-r border-cyan-300/10"
-          style={{ backgroundColor: '#07162f' }}
-        >
+        <div className="sidebar flex w-64 flex-col border-r border-white/10 bg-camcore-deep-core">
           <div className="flex h-0 flex-1 flex-col">
             <div className="flex flex-1 flex-col overflow-y-auto pb-4">
               <div className="flex flex-shrink-0 items-center">
@@ -347,10 +376,10 @@ const Sidebar = ({
                         key={`desktop-${sidebarLink.messagesKey}`}
                         href={sidebarLink.href}
                         as={sidebarLink.as}
-                        className={`group flex items-center rounded-lg px-3 py-2 text-lg font-medium leading-6 transition duration-150 ease-in-out focus:outline-none ${
+                        className={`group flex items-center rounded-lg px-3 py-2 text-lg font-medium leading-6 transition duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                           router.pathname.match(sidebarLink.activeRegExp)
-                            ? 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/30 hover:from-sky-400 hover:to-cyan-400'
-                            : 'text-slate-100 hover:bg-white/10 focus:bg-white/10'
+                            ? 'bg-camcore-coral font-semibold text-camcore-deep-core hover:bg-camcore-coral-light'
+                            : 'text-slate-100 hover:bg-white/10 focus-visible:bg-white/10'
                         } `}
                         data-testid={sidebarLink.dataTestId}
                       >
@@ -362,34 +391,30 @@ const Sidebar = ({
                           pendingRequestsCount > 0 &&
                           hasPermission(Permission.MANAGE_REQUESTS) && (
                             <div className="ml-auto flex">
-                              <Badge
-                                className={`rounded-md bg-gradient-to-r ${
-                                  router.pathname.match(
+                              <CountBadge
+                                active={
+                                  !!router.pathname.match(
                                     sidebarLink.activeRegExp
                                   )
-                                    ? 'border-cyan-400 from-sky-600 to-cyan-600'
-                                    : 'border-sky-400 from-sky-500 to-cyan-500'
-                                }`}
+                                }
                               >
                                 {pendingRequestsCount}
-                              </Badge>
+                              </CountBadge>
                             </div>
                           )}
                         {sidebarLink.messagesKey === 'issues' &&
                           openIssuesCount > 0 &&
                           hasPermission(Permission.MANAGE_ISSUES) && (
                             <div className="ml-auto flex">
-                              <Badge
-                                className={`rounded-md bg-gradient-to-r ${
-                                  router.pathname.match(
+                              <CountBadge
+                                active={
+                                  !!router.pathname.match(
                                     sidebarLink.activeRegExp
                                   )
-                                    ? 'border-cyan-400 from-sky-600 to-cyan-600'
-                                    : 'border-sky-400 from-sky-500 to-cyan-500'
-                                }`}
+                                }
                               >
                                 {openIssuesCount}
-                              </Badge>
+                              </CountBadge>
                             </div>
                           )}
                       </Link>
@@ -397,26 +422,7 @@ const Sidebar = ({
                   })}
                 </div>
 
-                <div className="mt-7 border-t border-white/10 pt-5">
-                  <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.18em] text-camcore-coral-light">
-                    CamCore
-                  </p>
-                  <div className="space-y-1.5">
-                    {CamCoreLinks.map((camCoreLink) => (
-                      <a
-                        key={`desktop-${camCoreLink.label}`}
-                        href={camCoreLink.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-200 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none"
-                      >
-                        {camCoreLink.svgIcon}
-                        <span>{camCoreLink.label}</span>
-                        <ArrowTopRightOnSquareIcon className="ml-auto h-4 w-4 text-slate-400" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
+                <CamCoreLinkSection />
               </nav>
               {hasPermission(Permission.ADMIN) && (
                 <div className="px-2 pt-4">
