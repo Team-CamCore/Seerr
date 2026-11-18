@@ -14,6 +14,7 @@ import {
   HomeIcon,
   LifebuoyIcon,
   PlayCircleIcon,
+  QuestionMarkCircleIcon,
   SignalIcon,
   SparklesIcon,
   TvIcon,
@@ -129,33 +130,68 @@ const SidebarLinks: SidebarLinkProps[] = [
   },
 ];
 
+// CamCore service links. Labels follow the CamCore Brand Guidelines
+// (OPS-A-74): sentence case, with proper names keeping their capitalisation.
+// Targets are the canonical camcore.au entry points (OPS-A-127).
 const CamCoreLinks: CamCoreLinkProps[] = [
   {
     href: 'https://camcore.au',
-    label: 'CamCore Home',
-    svgIcon: <HomeIcon className="mr-3 h-5 w-5" />,
+    label: 'CamCore home',
+    svgIcon: <HomeIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://camcore.au/help-centre.html',
-    label: 'Help Centre',
-    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/help',
+    label: 'Help centre',
+    svgIcon: <QuestionMarkCircleIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://status.camcore.au',
-    label: 'Service Status',
-    svgIcon: <SignalIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/status',
+    label: 'CamCore Status',
+    svgIcon: <SignalIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
     href: 'https://plex.camcore.au',
     label: 'Cameron-Media',
-    svgIcon: <PlayCircleIcon className="mr-3 h-5 w-5" />,
+    svgIcon: <PlayCircleIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
   {
-    href: 'https://camcore.au/support.html',
-    label: 'Support Request',
-    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5" />,
+    href: 'https://camcore.au/support',
+    label: 'Support',
+    svgIcon: <LifebuoyIcon className="mr-3 h-5 w-5 flex-shrink-0" />,
   },
 ];
+
+const CamCoreLinkSection = ({ onNavigate }: { onNavigate?: () => void }) => (
+  <div className="mt-7 border-t border-white/10 pt-5">
+    <h2
+      id="camcore-links-heading"
+      className="mb-3 px-3 text-sm font-semibold text-camcore-coral-light"
+    >
+      CamCore
+    </h2>
+    <ul aria-labelledby="camcore-links-heading" className="space-y-1.5">
+      {CamCoreLinks.map((camCoreLink) => (
+        <li key={camCoreLink.href}>
+          <a
+            href={camCoreLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onNavigate}
+            className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-100 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:outline-none focus-visible:bg-white/10 focus-visible:ring-2 focus-visible:ring-camcore-coral"
+          >
+            {camCoreLink.svgIcon}
+            <span>{camCoreLink.label}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+            <ArrowTopRightOnSquareIcon
+              className="ml-auto h-4 w-4 flex-shrink-0 text-slate-300"
+              aria-hidden="true"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const Sidebar = ({
   open,
@@ -276,27 +312,7 @@ const Sidebar = ({
                         })}
                       </div>
 
-                      <div className="mt-7 border-t border-white/10 pt-5">
-                        <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.18em] text-camcore-coral-light">
-                          CamCore
-                        </p>
-                        <div className="space-y-1.5">
-                          {CamCoreLinks.map((camCoreLink) => (
-                            <a
-                              key={`mobile-${camCoreLink.label}`}
-                              href={camCoreLink.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => setClosed()}
-                              className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-200 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none"
-                            >
-                              {camCoreLink.svgIcon}
-                              <span>{camCoreLink.label}</span>
-                              <ArrowTopRightOnSquareIcon className="ml-auto h-4 w-4 text-slate-400" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                      <CamCoreLinkSection onNavigate={() => setClosed()} />
                     </nav>
                     {hasPermission(Permission.ADMIN) && (
                       <div className="px-2 pt-4">
@@ -397,26 +413,7 @@ const Sidebar = ({
                   })}
                 </div>
 
-                <div className="mt-7 border-t border-white/10 pt-5">
-                  <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.18em] text-camcore-coral-light">
-                    CamCore
-                  </p>
-                  <div className="space-y-1.5">
-                    {CamCoreLinks.map((camCoreLink) => (
-                      <a
-                        key={`desktop-${camCoreLink.label}`}
-                        href={camCoreLink.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-200 transition duration-150 ease-in-out hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none"
-                      >
-                        {camCoreLink.svgIcon}
-                        <span>{camCoreLink.label}</span>
-                        <ArrowTopRightOnSquareIcon className="ml-auto h-4 w-4 text-slate-400" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
+                <CamCoreLinkSection />
               </nav>
               {hasPermission(Permission.ADMIN) && (
                 <div className="px-2 pt-4">

@@ -16,7 +16,7 @@
   ·
   <a href="https://status.camcore.au">CamCore Status</a>
   ·
-  <a href="https://camcore.au/help-centre.html">Help Centre</a>
+  <a href="https://camcore.au/help">Help Centre</a>
   ·
   <a href="https://github.com/seerr-team/seerr">Upstream Seerr</a>
 </p>
@@ -37,8 +37,8 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | Public URL | `https://requests.camcore.au` |
 | Container | `ghcr.io/camcoreau/seerr` |
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
-| Support | `https://camcore.au/support.html` |
-| Help Centre | `https://camcore.au/help-centre.html` |
+| Support | `https://camcore.au/support` |
+| Help Centre | `https://camcore.au/help` |
 | Service status | `https://status.camcore.au` |
 | Time zone | `Australia/Melbourne` |
 
@@ -195,7 +195,7 @@ When updating from upstream:
 
 ## Support and upstream issues
 
-CamCore-specific deployment, branding, access and operational matters should use [CamCore Support](https://camcore.au/support.html).
+CamCore-specific deployment, branding, access and operational matters should use [CamCore Support](https://camcore.au/support).
 
 For general Seerr application behaviour, first check the upstream project:
 
