@@ -2,24 +2,24 @@ include ../_partials/camcore.pug
 
 +camcoreEmail('CAMCORE MEDIA • REQUESTS', event, heading)
   +camcoreGreeting(recipientName, recipientEmail, applicationTitle)
-  p(style='margin: 14px 0 0; color: #435562; font-size: 15px; line-height: 24px;')
+  p(style='margin: 14px 0 0; color: #667180; font-size: 15px; line-height: 24px;')
     | #{body}
 
   +camcorePanel('Request details')
     table(role='presentation' cellpadding='0' cellspacing='0' border='0' width='100%')
       tr
         td(style='vertical-align: top; padding-right: 16px;')
-          div(style='color: #071827; font-size: 21px; line-height: 27px; font-weight: 800;')
+          div(style='color: #101720; font-size: 21px; line-height: 27px; font-weight: 800;')
             | #{mediaName}
-          div(style='margin-top: 12px; color: #526572; font-size: 13px; line-height: 20px;')
+          div(style='margin-top: 12px; color: #667180; font-size: 13px; line-height: 20px;')
             span(style='display: block;')
-              strong(style='color: #718391; font-weight: 750;') Requested by&nbsp;
+              strong(style='color: #667180; font-weight: 750;') Requested by&nbsp;
               | #{requestedBy.replace(/\.|@/g, ((x) => x + '\ufeff'))}
             each extra in mediaExtra
               span(style='display: block; margin-top: 3px;')
-                strong(style='color: #718391; font-weight: 750;') #{extra.name}&nbsp;
+                strong(style='color: #667180; font-weight: 750;') #{extra.name}&nbsp;
                 | #{extra.value}
-            span(style='display: block; margin-top: 7px; color: #81919b; font-size: 12px;')
+            span(style='display: block; margin-top: 7px; color: #667180; font-size: 12px;')
               | #{timestamp}
         if imageUrl
           td.camcore-poster(width='104' style='width: 104px; vertical-align: top;')
@@ -33,8 +33,8 @@ include ../_partials/camcore.pug
 
   table(role='presentation' cellpadding='0' cellspacing='0' border='0' width='100%' style='margin: 26px 0 0;')
     tr
-      td(style='padding: 15px 17px; background-color: #f8fafb; border-left: 3px solid #12c4de; color: #435562; font-size: 13px; line-height: 20px;')
-        div(style='color: #10212b; font-weight: 750;') Need help?
+      td(style='padding: 15px 17px; background-color: #F4F6F8; border-left: 3px solid #FF4B2B; color: #667180; font-size: 13px; line-height: 20px;')
+        div(style='color: #101720; font-weight: 750;') Need help?
         div(style='margin-top: 3px;') Open Cameron-Media Requests for the latest request status. For access, playback or account issues, contact CamCore Support.
         div(style='margin-top: 7px;')
-          a(href='https://camcore.au/support' style='color: #0d879b; font-weight: 700; text-decoration: none;') Open CamCore Support
+          a(href='https://camcore.au/support' style='color: #C8321A; font-weight: 700; text-decoration: none;') Open CamCore Support

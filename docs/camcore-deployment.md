@@ -131,7 +131,7 @@ After changing email settings, send a test notification and confirm:
 - the CamCore logo loads;
 - the test subject is `Test notification — Cameron-Media Requests` with no `[CamCore Media]` prefix;
 - the email displays correctly in Outlook desktop and Outlook on the web;
-- the Help Centre and Service Status links work;
+- the Help centre and CamCore Status links work;
 - request and issue buttons return to `https://requests.camcore.au`.
 
 ## Post-deployment verification

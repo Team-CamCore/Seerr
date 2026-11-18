@@ -14,7 +14,7 @@
 <p align="center">
   <a href="https://requests.camcore.au"><strong>Open Cameron-Media Requests</strong></a>
   ·
-  <a href="https://status.camcore.au">CamCore Status</a>
+  <a href="https://camcore.au/status">CamCore Status</a>
   ·
   <a href="https://camcore.au/help">Help Centre</a>
   ·
@@ -39,7 +39,7 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
 | Support | `https://camcore.au/support` |
 | Help Centre | `https://camcore.au/help` |
-| Service status | `https://status.camcore.au` |
+| Service status | `https://camcore.au/status` |
 | Time zone | `Australia/Melbourne` |
 
 ## CamCore customisation
@@ -50,7 +50,7 @@ The downstream layer includes:
 - CamCore desktop and mobile navigation;
 - CamCore browser and PWA identity;
 - CamCore offline page;
-- links to CamCore Home, Help Centre, Service Status, Cameron-Media and Support;
+- links to CamCore home, Help centre, CamCore Status, Cameron-Media and Support;
 - CamCore-branded request and account emails;
 - CamCore GHCR image metadata and publishing workflow;
 - CamCore deployment, verification and rollback guidance.
@@ -69,7 +69,7 @@ All Cameron-Media Requests email templates use a common shared layout with:
 - event/status badges;
 - structured light detail panels;
 - cyan primary actions;
-- CamCore Help Centre, Service Status and support contact details;
+- CamCore Help centre, CamCore Status and support contact details;
 - clear notification subjects without a redundant brand prefix.
 
 Covered messages include request lifecycle updates, media issues, account creation, password reset and test notifications.

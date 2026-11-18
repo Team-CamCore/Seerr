@@ -33,7 +33,7 @@ const messages = defineMessages('components.Login', {
   camcoreintro:
     'Sign in with your authorised Plex account to request movies and series from Cameron-Media.',
   needhelp: 'Need help signing in?',
-  openhelpcentre: 'Open the CamCore Help Centre',
+  openhelpcentre: 'Open the CamCore Help centre',
 });
 
 const Login = () => {
@@ -174,10 +174,10 @@ const Login = () => {
             alt="CamCore – Cameron Family Secure Network"
             fill
             priority
-            className="object-contain mix-blend-screen drop-shadow-[0_10px_32px_rgba(0,0,0,0.65)]"
+            className="object-contain"
           />
         </div>
-        <p className="mt-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/90">
+        <p className="mt-2 text-center text-sm font-semibold text-gray-100">
           {intl.formatMessage(messages.camcoreservicename)}
         </p>
       </div>
@@ -279,7 +279,7 @@ const Login = () => {
                   href="https://camcore.au/help"
                   target="_blank"
                   rel="noreferrer"
-                  className="font-medium text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition hover:text-cyan-200"
+                  className="font-medium text-camcore-coral-light underline decoration-camcore-coral-light/40 underline-offset-4 transition hover:text-white"
                 >
                   {intl.formatMessage(messages.openhelpcentre)}
                 </a>

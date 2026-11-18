@@ -18,7 +18,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/camcore-icon.svg" type="image/svg+xml" />
           <meta name="application-name" content="CamCore Requests" />
-          <meta name="theme-color" content="#06111f" />
+          <meta name="theme-color" content="#101720" />
         </Head>
         <body>
           <Main />
