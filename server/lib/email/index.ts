@@ -129,7 +129,13 @@ class PreparedEmail extends Email {
           : [],
       },
       send: true,
-      transport: transport,
+      // nodemailer >= 10 ships its own type definitions, while
+      // @types/email-templates still describes the transport using the
+      // separate @types/nodemailer package. The runtime object is the same
+      // nodemailer transport, so bridge the two declarations here.
+      transport: transport as unknown as NonNullable<
+        ConstructorParameters<typeof Email>[0]
+      >['transport'],
       preview: false,
     });
   }
