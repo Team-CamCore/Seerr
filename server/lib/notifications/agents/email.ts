@@ -17,7 +17,7 @@ import type { NotificationAgent, NotificationPayload } from './agent';
 import { BaseAgent } from './agent';
 
 const PUBLIC_LOGO_URL =
-  'https://raw.githubusercontent.com/camcoreau/Seerr/refs/heads/develop/public/logo_full.png';
+  'https://raw.githubusercontent.com/Team-CamCore/Seerr/refs/heads/develop/public/logo_full.png';
 
 const messages = defineMessages('notifications.agents.email', {
   issueType: '{type} issue',

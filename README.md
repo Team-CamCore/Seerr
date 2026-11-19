@@ -14,9 +14,9 @@
 <p align="center">
   <a href="https://requests.camcore.au"><strong>Open Cameron-Media Requests</strong></a>
   ·
-  <a href="https://status.camcore.au">CamCore Status</a>
+  <a href="https://camcore.au/status">CamCore Status</a>
   ·
-  <a href="https://camcore.au/help-centre.html">Help Centre</a>
+  <a href="https://camcore.au/help">Help Centre</a>
   ·
   <a href="https://github.com/seerr-team/seerr">Upstream Seerr</a>
 </p>
@@ -35,11 +35,11 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | --- | --- |
 | Service | Cameron-Media Requests |
 | Public URL | `https://requests.camcore.au` |
-| Container | `ghcr.io/camcoreau/seerr` |
+| Container | `ghcr.io/team-camcore/seerr` |
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
-| Support | `https://camcore.au/support.html` |
-| Help Centre | `https://camcore.au/help-centre.html` |
-| Service status | `https://status.camcore.au` |
+| Support | `https://camcore.au/support` |
+| Help Centre | `https://camcore.au/help` |
+| Service status | `https://camcore.au/status` |
 | Time zone | `Australia/Melbourne` |
 
 ## CamCore customisation
@@ -50,7 +50,7 @@ The downstream layer includes:
 - CamCore desktop and mobile navigation;
 - CamCore browser and PWA identity;
 - CamCore offline page;
-- links to CamCore Home, Help Centre, Service Status, Cameron-Media and Support;
+- links to CamCore home, Help centre, CamCore Status, Cameron-Media and Support;
 - CamCore-branded request and account emails;
 - CamCore GHCR image metadata and publishing workflow;
 - CamCore deployment, verification and rollback guidance.
@@ -64,12 +64,12 @@ Seerr email has been brought into the same communication system used by CamCore 
 All Cameron-Media Requests email templates use a common shared layout with:
 
 - the dark CamCore brand header;
-- cyan brand divider;
+- Core Coral brand divider;
 - `CAMCORE MEDIA • REQUESTS` service labelling;
 - event/status badges;
 - structured light detail panels;
-- cyan primary actions;
-- CamCore Help Centre, Service Status and support contact details;
+- Accessible Coral primary actions;
+- CamCore Help centre, CamCore Status and support contact details;
 - clear notification subjects without a redundant brand prefix.
 
 Covered messages include request lifecycle updates, media issues, account creation, password reset and test notifications.
@@ -89,9 +89,9 @@ See [CamCore Deployment](./docs/camcore-deployment.md) for the SMTP and validati
 Successful CamCore builds publish:
 
 ```text
-ghcr.io/camcoreau/seerr:latest
-ghcr.io/camcoreau/seerr:camcore
-ghcr.io/camcoreau/seerr:develop-<sha>
+ghcr.io/team-camcore/seerr:latest
+ghcr.io/team-camcore/seerr:camcore
+ghcr.io/team-camcore/seerr:develop-<sha>
 ```
 
 The CamCore production image is built for:
@@ -121,7 +121,7 @@ See [CamCore Deployment](./docs/camcore-deployment.md) for the full deployment, 
 ```yaml
 services:
   seerr:
-    image: ghcr.io/camcoreau/seerr:latest
+    image: ghcr.io/team-camcore/seerr:latest
     init: true
     container_name: seerr
     restart: unless-stopped
@@ -195,7 +195,7 @@ When updating from upstream:
 
 ## Support and upstream issues
 
-CamCore-specific deployment, branding, access and operational matters should use [CamCore Support](https://camcore.au/support.html).
+CamCore-specific deployment, branding, access and operational matters should use [CamCore Support](https://camcore.au/support).
 
 For general Seerr application behaviour, first check the upstream project:
 

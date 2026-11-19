@@ -2,7 +2,7 @@ mixin camcoreButton(url, label)
   if url
     table(role='presentation' cellpadding='0' cellspacing='0' border='0' style='margin: 24px 0 0;')
       tr
-        td(bgcolor='#FF4B2B' style='border-radius: 7px;')
+        td(bgcolor='#C8321A' style='border-radius: 7px;')
           a(href=url style='display: inline-block; padding: 13px 20px; color: #FFFFFF; font-size: 15px; line-height: 20px; font-weight: 750; text-decoration: none; border-radius: 7px;')
             | #{label}
 
@@ -19,7 +19,7 @@ mixin camcoreGreeting(recipientName, recipientEmail, applicationTitle)
   - const cleanRecipientName = recipientName ? recipientName.trim() : ''
   - const isServiceRecipient = /^cameron-media(?:$|\s)/i.test(cleanRecipientName)
   if cleanRecipientName && cleanRecipientName !== recipientEmail && cleanRecipientName !== applicationTitle && !isServiceRecipient
-    p(style='margin: 18px 0 0; color: #435562; font-size: 15px; line-height: 24px;')
+    p(style='margin: 18px 0 0; color: #667180; font-size: 15px; line-height: 24px;')
       | Hi #{cleanRecipientName.replace(/\.|@/g, ((x) => x + '\ufeff'))},
 
 mixin camcoreEmail(serviceLabel, badgeText, headingText)
@@ -77,9 +77,9 @@ mixin camcoreEmail(serviceLabel, badgeText, headingText)
                     if applicationUrl
                       a(href=applicationUrl style='color: #C8321A; font-weight: 650; text-decoration: none;') Cameron-Media Requests
                       span(style='color: #98A2AE;') &nbsp;&nbsp;•&nbsp;&nbsp;
-                    a(href='https://camcore.au/help-centre.html' style='color: #C8321A; font-weight: 650; text-decoration: none;') Help Centre
+                    a(href='https://camcore.au/help' style='color: #C8321A; font-weight: 650; text-decoration: none;') Help centre
                     span(style='color: #98A2AE;') &nbsp;&nbsp;•&nbsp;&nbsp;
-                    a(href='https://status.camcore.au' style='color: #C8321A; font-weight: 650; text-decoration: none;') Service Status
+                    a(href='https://camcore.au/status' style='color: #C8321A; font-weight: 650; text-decoration: none;') CamCore Status
                   div(style='margin-top: 4px; font-size: 12px; line-height: 18px;')
                     a(href='mailto:help@camcore.au' style='color: #C8321A; font-weight: 650; text-decoration: none;') help@camcore.au
                   div(style='margin-top: 16px; color: #667180; font-size: 10px; line-height: 15px;') This message relates to Cameron-Media Requests and may contain information intended only for its recipient.
