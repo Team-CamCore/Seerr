@@ -27,6 +27,7 @@ jobs:
 
     permissions:
       contents: read
+      packages: read
       security-events: write
 
     env:
@@ -49,6 +50,12 @@ jobs:
 
       - name: Run Trivy image scan
         uses: aquasecurity/trivy-action@v0.36.0
+        env:
+          # ghcr.io/team-camcore/seerr is private. It is published by this
+          # repository's CamCore Seerr Image workflow, so the job's own token
+          # can pull it with packages: read (OPS-1507).
+          TRIVY_USERNAME: ${{ github.repository_owner }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         with:
           image-ref: ghcr.io/team-camcore/seerr:latest
           format: sarif
