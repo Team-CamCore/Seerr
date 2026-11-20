@@ -16,7 +16,7 @@
   ·
   <a href="https://camcore.au/status">CamCore Status</a>
   ·
-  <a href="https://camcore.au/help">Help Centre</a>
+  <a href="https://camcore.au/help">Help centre</a>
   ·
   <a href="https://github.com/seerr-team/seerr">Upstream Seerr</a>
 </p>
@@ -38,8 +38,8 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | Container | `ghcr.io/team-camcore/seerr` |
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
 | Support | `https://camcore.au/support` |
-| Help Centre | `https://camcore.au/help` |
-| Service status | `https://camcore.au/status` |
+| Help centre | `https://camcore.au/help` |
+| CamCore Status | `https://camcore.au/status` |
 | Time zone | `Australia/Melbourne` |
 
 ## CamCore customisation
@@ -100,7 +100,7 @@ The CamCore production image is built for:
 linux/amd64
 ```
 
-`latest` and `camcore` are only published after the CamCore validation job succeeds. The SHA tag provides an immutable version for rollback and troubleshooting.
+All three tags are published only after the CamCore validation job succeeds. `latest` and `camcore` move with every build; production is pinned to the immutable `develop-<sha>` tag, which is also the rollback target. Production deployments are made under an approved Change in YouTrack.
 
 ## Updating the existing service
 
@@ -121,7 +121,7 @@ See [CamCore Deployment](./docs/camcore-deployment.md) for the full deployment, 
 ```yaml
 services:
   seerr:
-    image: ghcr.io/team-camcore/seerr:latest
+    image: ghcr.io/team-camcore/seerr:develop-<sha>
     init: true
     container_name: seerr
     restart: unless-stopped
@@ -140,7 +140,7 @@ services:
       retries: 3
 ```
 
-Replace the example host path with the exact config-folder path already used by the current container.
+Replace `develop-<sha>` with the build being deployed, and the example host path with the exact config-folder path already used by the current container.
 
 ## Development
 
