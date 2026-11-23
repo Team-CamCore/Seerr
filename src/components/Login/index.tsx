@@ -171,7 +171,7 @@ const Login = () => {
         <div className="relative h-28 w-full max-w-sm sm:h-32">
           <Image
             src="/logo_full.svg"
-            alt="CamCore – Cameron Family Secure Network"
+            alt="CamCore"
             fill
             priority
             className="object-contain"
