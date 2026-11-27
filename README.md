@@ -16,7 +16,7 @@
   ·
   <a href="https://camcore.au/status">CamCore Status</a>
   ·
-  <a href="https://camcore.au/help">Help centre</a>
+  <a href="https://help.camcore.au/hc/en-au">Help centre</a>
   ·
   <a href="https://github.com/seerr-team/seerr">Upstream Seerr</a>
 </p>
@@ -38,7 +38,7 @@ CamCore-specific changes are intentionally kept narrow so upstream fixes can con
 | Container | `ghcr.io/team-camcore/seerr` |
 | Email sender | `Requests | CamCore Media <help@camcore.au>` |
 | Support | `https://camcore.au/support` |
-| Help centre | `https://camcore.au/help` |
+| Help centre | `https://help.camcore.au/hc/en-au` |
 | CamCore Status | `https://camcore.au/status` |
 | Time zone | `Australia/Melbourne` |
 
