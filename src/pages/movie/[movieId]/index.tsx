@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<MoviePageProps> = async (
   ctx
 ) => {
   const response = await axios.get<MovieDetailsType>(
-    `http://${getHostAndPort()}/api/v1/movie/${ctx.query.movieId}`,
+    `http://${getHostAndPort()}/api/v1/movie/${encodeURIComponent(String(ctx.query.movieId))}`,
     {
       headers: ctx.req?.headers?.cookie
         ? { cookie: ctx.req.headers.cookie }

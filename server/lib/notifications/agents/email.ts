@@ -17,47 +17,123 @@ import type { NotificationAgent, NotificationPayload } from './agent';
 import { BaseAgent } from './agent';
 
 const PUBLIC_LOGO_URL =
-  'https://raw.githubusercontent.com/seerr-team/seerr/refs/heads/develop/public/logo_full.svg';
+  'https://raw.githubusercontent.com/Team-CamCore/Seerr/refs/heads/develop/public/logo_full.png';
 
 const messages = defineMessages('notifications.agents.email', {
   issueType: '{type} issue',
   issue: 'issue',
   pendingRequest:
-    'A new request for the following {mediaType} is pending approval:',
+    'A new {mediaType} request has been received and is waiting for review.',
   pendingRequest4k:
-    'A new request for the following {mediaType} in 4K is pending approval:',
+    'A new 4K {mediaType} request has been received and is waiting for review.',
   autoRequested:
-    'A new request for the following {mediaType} was automatically submitted:',
+    'A new {mediaType} request was submitted automatically and has been added to the request queue.',
   autoRequested4k:
-    'A new request for the following {mediaType} in 4K was automatically submitted:',
+    'A new 4K {mediaType} request was submitted automatically and has been added to the request queue.',
   approvedRequest:
-    'Your request for the following {mediaType} has been approved:',
+    'Your {mediaType} request has been approved. Cameron-Media will now begin preparing it for your library.',
   approvedRequest4k:
-    'Your request for the following {mediaType} in 4K has been approved:',
+    'Your 4K {mediaType} request has been approved. Cameron-Media will now begin preparing it for your library.',
   autoApproved:
-    'A new request for the following {mediaType} has been automatically approved:',
+    'A new {mediaType} request was approved automatically and will now be prepared for Cameron-Media.',
   autoApproved4k:
-    'A new request for the following {mediaType} in 4K has been automatically approved:',
+    'A new 4K {mediaType} request was approved automatically and will now be prepared for Cameron-Media.',
   availableRequest:
-    'Your request for the following {mediaType} is now available:',
+    'Your requested {mediaType} is now available to watch on Cameron-Media.',
   availableRequest4k:
-    'Your request for the following {mediaType} in 4K is now available:',
-  declinedRequest: 'Your request for the following {mediaType} was declined:',
+    'Your requested 4K {mediaType} is now available to watch on Cameron-Media.',
+  declinedRequest:
+    'Your {mediaType} request was not approved. Open the request to review its current status or contact CamCore Support if you need assistance.',
   declinedRequest4k:
-    'Your request for the following {mediaType} in 4K was declined:',
+    'Your 4K {mediaType} request was not approved. Open the request to review its current status or contact CamCore Support if you need assistance.',
   failedRequest:
-    'A request for the following {mediaType} failed to be added to {service}:',
+    'This {mediaType} request could not be added to {service}. CamCore Operations may need to review the request before it can continue.',
   failedRequest4k:
-    'A request for the following {mediaType} in 4K failed to be added to {service}:',
+    'This 4K {mediaType} request could not be added to {service}. CamCore Operations may need to review the request before it can continue.',
   issueCreated:
-    'A new {issueType} has been reported by {userName} for the {mediaType} {subject}:',
+    'A new {issueType} has been reported by {userName} for {subject}.',
   issueComment:
-    '{userName} commented on the {issueType} for the {mediaType} {subject}:',
+    '{userName} added a new comment to the {issueType} for {subject}.',
   issueResolved:
-    'The {issueType} for the {mediaType} {subject} was marked as resolved by {userName}!',
+    'The {issueType} for {subject} has been marked as resolved by {userName}.',
   issueReopened:
-    'The {issueType} for the {mediaType} {subject} was reopened by {userName}.',
+    'The {issueType} for {subject} has been reopened by {userName} and may need further review.',
 });
+
+const getCamCoreHeading = (type: Notification): string => {
+  switch (type) {
+    case Notification.MEDIA_PENDING:
+      return 'A new request is waiting for review';
+    case Notification.MEDIA_AUTO_REQUESTED:
+      return 'A new request has been submitted';
+    case Notification.MEDIA_APPROVED:
+      return 'Your request has been approved';
+    case Notification.MEDIA_AUTO_APPROVED:
+      return 'A request was approved automatically';
+    case Notification.MEDIA_AVAILABLE:
+      return 'Your request is ready to watch';
+    case Notification.MEDIA_DECLINED:
+      return 'Your request was not approved';
+    case Notification.MEDIA_FAILED:
+      return 'A request needs attention';
+    case Notification.ISSUE_CREATED:
+      return 'A media issue has been reported';
+    case Notification.ISSUE_COMMENT:
+      return 'A media issue has a new update';
+    case Notification.ISSUE_RESOLVED:
+      return 'A media issue has been resolved';
+    case Notification.ISSUE_REOPENED:
+      return 'A media issue has been reopened';
+    case Notification.TEST_NOTIFICATION:
+      return 'Cameron-Media Requests email is working';
+    default:
+      return 'Cameron-Media Requests notification';
+  }
+};
+
+const getCamCoreEventLabel = (
+  type: Notification,
+  payloadEvent?: string
+): string => {
+  if (payloadEvent?.trim()) {
+    return payloadEvent.trim();
+  }
+
+  switch (type) {
+    case Notification.MEDIA_PENDING:
+      return 'Request pending';
+    case Notification.MEDIA_AUTO_REQUESTED:
+      return 'Request submitted';
+    case Notification.MEDIA_APPROVED:
+    case Notification.MEDIA_AUTO_APPROVED:
+      return 'Request approved';
+    case Notification.MEDIA_AVAILABLE:
+      return 'Request available';
+    case Notification.MEDIA_DECLINED:
+      return 'Request declined';
+    case Notification.MEDIA_FAILED:
+      return 'Request failed';
+    case Notification.ISSUE_CREATED:
+      return 'Issue reported';
+    case Notification.ISSUE_COMMENT:
+      return 'Issue updated';
+    case Notification.ISSUE_RESOLVED:
+      return 'Issue resolved';
+    case Notification.ISSUE_REOPENED:
+      return 'Issue reopened';
+    case Notification.TEST_NOTIFICATION:
+      return 'Test notification';
+    default:
+      return 'Notification';
+  }
+};
+
+const formatNotificationTimestamp = (): string =>
+  new Intl.DateTimeFormat('en-AU', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: 'Australia/Melbourne',
+  }).format(new Date());
 
 class EmailAgent
   extends BaseAgent<NotificationAgentEmail>
@@ -103,8 +179,10 @@ class EmailAgent
     const logoUrl = usePublicLogo
       ? PUBLIC_LOGO_URL
       : applicationUrl
-        ? `${applicationUrl}/logo_full.svg`
+        ? `${applicationUrl}/logo_full.png`
         : undefined;
+    const event = getCamCoreEventLabel(type, payload.event);
+    const heading = getCamCoreHeading(type);
 
     if (type === Notification.TEST_NOTIFICATION) {
       return {
@@ -113,7 +191,8 @@ class EmailAgent
           to: recipientEmail,
         },
         locals: {
-          body: payload.message,
+          event,
+          heading,
           applicationUrl,
           applicationTitle,
           logoUrl,
@@ -193,12 +272,13 @@ class EmailAgent
           to: recipientEmail,
         },
         locals: {
-          event: payload.event,
+          event,
+          heading,
           body,
           mediaName: payload.subject,
           mediaExtra: payload.extra ?? [],
           imageUrl: embedPoster ? payload.image : undefined,
-          timestamp: new Date().toTimeString(),
+          timestamp: formatNotificationTimestamp(),
           requestedBy: payload.request.requestedBy.displayName,
           actionUrl: applicationUrl
             ? `${applicationUrl}/${payload.media?.mediaType}/${payload.media?.tmdbId}`
@@ -261,14 +341,15 @@ class EmailAgent
           to: recipientEmail,
         },
         locals: {
-          event: payload.event,
+          event,
+          heading,
           body,
           issueDescription: payload.message,
           issueComment: payload.comment?.message,
           mediaName: payload.subject,
           extra: payload.extra ?? [],
           imageUrl: embedPoster ? payload.image : undefined,
-          timestamp: new Date().toTimeString(),
+          timestamp: formatNotificationTimestamp(),
           actionUrl: applicationUrl
             ? `${applicationUrl}/issues/${payload.issue.id}`
             : undefined,

@@ -1,78 +1,243 @@
+<!-- CAMCORE-REPOSITORY-BRANDING:START -->
 <p align="center">
-<img src="./public/logo_full.svg" alt="Seerr" style="margin: 20px 0;">
+  <a href="https://camcore.au">
+    <img src=".github/brand/camcore-repository-banner.png" alt="CamCore" width="640">
+  </a>
 </p>
+<!-- CAMCORE-REPOSITORY-BRANDING:END -->
+
 <p align="center">
-<img src="https://github.com/seerr-team/seerr/actions/workflows/release.yml/badge.svg" alt="Seerr Release" />
-<img src="https://github.com/seerr-team/seerr/actions/workflows/ci.yml/badge.svg" alt="Seerr CI">
-<a href="https://scorecard.dev/viewer/?uri=github.com/seerr-team/seerr"><img src="https://img.shields.io/ossf-scorecard/github.com/seerr-team/seerr?label=openssf" alt="OpenSSF Scorecard"></a>
+  <strong>Cameron-Media Requests</strong><br>
+  CamCore-maintained deployment of Seerr for requesting movies and series on Cameron-Media.
 </p>
+
 <p align="center">
-<a href="https://discord.gg/seerr"><img src="https://img.shields.io/discord/783137440809746482" alt="Discord"></a>
-<a href="https://hub.docker.com/r/seerr/seerr"><img src="https://img.shields.io/docker/pulls/seerr/seerr" alt="Docker pulls"></a>
-<a href="https://translate.seerr.dev/engage/seerr/"><img src="https://translate.seerr.dev/widget/seerr/svg-badge.svg" alt="Translation status" /></a>
-<a href="https://github.com/seerr-team/seerr/blob/develop/LICENSE"><img src="https://img.shields.io/github/license/seerr-team/seerr" alt="GitHub"></a>
+  <a href="https://requests.camcore.au"><strong>Open Cameron-Media Requests</strong></a>
+  ·
+  <a href="https://camcore.au/status">CamCore Status</a>
+  ·
+  <a href="https://camcore.au/help">Help centre</a>
+  ·
+  <a href="https://github.com/seerr-team/seerr">Upstream Seerr</a>
+</p>
 
-**Seerr** is a free and open source software application for managing requests for your media library. It integrates with the media server of your choice: [Jellyfin](https://jellyfin.org), [Plex](https://plex.tv), and [Emby](https://emby.media/). In addition, it integrates with your existing services, such as **[Sonarr](https://sonarr.tv/)**, **[Radarr](https://radarr.video/)**.
+## About this repository
 
-## Current Features
+This repository is the CamCore-maintained fork of [Seerr](https://github.com/seerr-team/seerr). It preserves the upstream media-request platform while applying CamCore visual identity, operational defaults, email communication standards and a CamCore container build for Cameron-Media Requests.
 
-- Full Jellyfin/Emby/Plex integration including authentication with user import & management.
-- Support for **PostgreSQL** and **SQLite** databases.
-- Supports Movies, Shows and Mixed Libraries.
-- Ability to change email addresses for SMTP purposes.
-- Easy integration with your existing services. Currently, Seerr supports Sonarr and Radarr. More to come!
-- Jellyfin/Emby/Plex library scan, to keep track of the titles which are already available.
-- Customizable request system, which allows users to request individual seasons or movies in a friendly, easy-to-use interface.
-- Incredibly simple request management UI. Don't dig through the app to simply approve recent requests!
-- Granular permission system.
-- Support for various notification agents.
-- Mobile-friendly design, for when you need to approve requests on the go!
-- Support for watchlisting & blocklisting media.
+The application continues to use Seerr's upstream request, discovery, user, notification and administration functionality, including Plex, Sonarr and Radarr integration.
 
-With more features on the way! Check out our [issue tracker](/../../issues) to see the features which have already been requested.
+CamCore-specific changes are intentionally kept narrow so upstream fixes can continue to be incorporated with minimal conflict.
 
-## Getting Started
+## CamCore service identity
 
-Check out our documentation for instructions on how to install and run Seerr:
+| Surface | CamCore identity |
+| --- | --- |
+| Service | Cameron-Media Requests |
+| Public URL | `https://requests.camcore.au` |
+| Container | `ghcr.io/team-camcore/seerr` |
+| Email sender | `Requests | CamCore Media <help@camcore.au>` |
+| Support | `https://camcore.au/support` |
+| Help centre | `https://camcore.au/help` |
+| CamCore Status | `https://camcore.au/status` |
+| Time zone | `Australia/Melbourne` |
 
-https://docs.seerr.dev/getting-started/
+## CamCore customisation
 
-## Preview
+The downstream layer includes:
 
-<img src="./public/preview.jpg" alt="Seerr application preview" />
+- CamCore sign-in branding;
+- CamCore desktop and mobile navigation;
+- CamCore browser and PWA identity;
+- CamCore offline page;
+- links to CamCore home, Help centre, CamCore Status, Cameron-Media and Support;
+- CamCore-branded request and account emails;
+- CamCore GHCR image metadata and publishing workflow;
+- CamCore deployment, verification and rollback guidance.
 
-## Migrating from Overseerr/Jellyseerr to Seerr
+The application title stored in the existing Seerr configuration remains configurable and is not reset by the branded image.
 
-Read our [release announcement](https://docs.seerr.dev/blog/seerr-release) to learn what Seerr means for Jellyseerr and Overseerr users.
+### Where the CamCore changes live
 
-Please follow our [migration guide](https://docs.seerr.dev/migration-guide) for detailed instructions on migrating from Overseerr or Jellyseerr.
+The CamCore layer is a small set of files on top of upstream. These are the ones to check most carefully when merging upstream:
 
-## Support
+| Area | Files |
+| --- | --- |
+| Sign-in, navigation and page chrome | `src/components/Login/`, `src/components/Layout/`, `src/components/ResetPassword/`, `src/pages/_document.tsx`, `tailwind.config.js` |
+| Browser, PWA and offline identity | `public/` logos and icons, `public/site.webmanifest`, `public/offline.html` |
+| Email | `server/templates/email/_partials/camcore.pug`, each template's `html.pug` and `subject.pug`, `server/lib/email/index.ts`, `server/lib/notifications/agents/email.ts` |
+| CI and deployment | `.github/workflows/camcore-image.yml`, `docs/camcore-deployment.md` |
 
-- Check out the [Seerr Documentation](https://docs.seerr.dev) before asking for help. Your question might already be in the docs!
-- You can get support on [Discord](https://discord.gg/seerr).
-- You can ask questions in the Help category of our [GitHub Discussions](/../../discussions).
-- Bug reports and feature requests can be submitted via [GitHub Issues](/../../issues).
+CamCore also made small changes to two upstream workflows: `codeql.yml` excludes test files, and `trivy-scan.yml` signs in to GHCR so it can scan the private CamCore image.
 
-## API Documentation
+## Email communication standard
 
-You can access the API documentation from your local Seerr install at http://localhost:5055/api-docs
+Seerr email has been brought into the same communication system used by CamCore Operations support mail.
 
-## Community
+All Cameron-Media Requests email templates use a common shared layout with:
 
-You can ask questions, share ideas, and more in [GitHub Discussions](/../../discussions).
+- the dark CamCore brand header;
+- Core Coral brand divider;
+- `CAMCORE MEDIA • REQUESTS` service labelling;
+- event/status badges;
+- structured light detail panels;
+- Accessible Coral primary actions;
+- CamCore Help centre, CamCore Status and support contact details;
+- clear notification subjects without a redundant brand prefix.
 
-If you would like to chat with other members of our growing community, [join the Seerr Discord server](https://discord.gg/seerr)!
+Covered messages include request lifecycle updates, media issues, account creation, password reset and test notifications.
 
-Our [Code of Conduct](./CODE_OF_CONDUCT.md) applies to all Seerr community channels.
+The expected sender identity is:
 
-## Contributing
+```text
+Requests | CamCore Media <help@camcore.au>
+```
 
-You can help improve Seerr too! Check out our [Contribution Guide](./CONTRIBUTING.md) to get started.
+The application remains **Cameron-Media Requests**. `CamCore Media` is used as the sender/brand family rather than as a replacement service name.
 
-## Contributors ✨
+See [CamCore Deployment](./docs/camcore-deployment.md) for the SMTP and validation checklist.
 
-[![Contributors](https://opencollective.com/seerr/contributors.svg?width=890)](https://opencollective.com/seerr/#backers)
+## Container image
 
-[![Become a Backer](https://opencollective.com/seerr/backers.svg)](https://opencollective.com/seerr/#backers)
-[![Become a Sponsor](https://opencollective.com/seerr/sponsors.svg)](https://opencollective.com/seerr/#sponsors)
+Successful CamCore builds publish:
+
+```text
+ghcr.io/team-camcore/seerr:latest
+ghcr.io/team-camcore/seerr:camcore
+ghcr.io/team-camcore/seerr:develop-<sha>
+```
+
+The CamCore production image is built for:
+
+```text
+linux/amd64
+```
+
+All three tags are published only after the CamCore validation job succeeds. `latest` and `camcore` move with every build; production is pinned to the immutable `develop-<sha>` tag, which is also the rollback target. Production deployments are made under an approved Change in YouTrack.
+
+The package is private. Production runs on Neptune, which has no GHCR login of its own, so images are pulled through Portainer (OPS-1531). The running version, rollback image and host paths are recorded in the Knowledge Base article *CMA-A-20 Seerr and Media Requests*.
+
+## CI
+
+The CamCore workflow is `CamCore Seerr Image` ([`.github/workflows/camcore-image.yml`](.github/workflows/camcore-image.yml)). It runs on pushes to `develop` and `agent/**` branches, and by hand. Changes that only touch Markdown files or `docs/` do not start it.
+
+- **Validate CamCore fork** runs on every push. It compiles the CamCore email templates, then runs `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build`.
+- **Build and publish AMD64 image** runs only on `develop`, after validation passes, and publishes the three tags above.
+
+Both jobs use GitHub-hosted runners. The upstream `Trivy Container Vulnerability Scan` workflow scans `ghcr.io/team-camcore/seerr:latest` every Friday and uploads the results to code scanning (OPS-1507).
+
+The other workflows in `.github/workflows` are upstream's and are kept unchanged to make upstream merges easier.
+
+## Updating the existing service
+
+Seerr stores persistent application data under:
+
+```text
+/app/config
+```
+
+Keep the existing host folder mapped to `/app/config` when moving to a new CamCore image. This preserves the database, users, requests, Plex connection, Sonarr and Radarr settings, notification agents and application preferences.
+
+Back up the mapped config folder before an application update.
+
+See [CamCore Deployment](./docs/camcore-deployment.md) for the full deployment, verification and rollback process.
+
+## Example Docker Compose service
+
+```yaml
+services:
+  seerr:
+    image: ghcr.io/team-camcore/seerr:develop-<sha>
+    init: true
+    container_name: seerr
+    restart: unless-stopped
+    environment:
+      - TZ=Australia/Melbourne
+      - PORT=5055
+    ports:
+      - "5055:5055"
+    volumes:
+      - /path/to/existing/seerr/config:/app/config
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+```
+
+Replace `develop-<sha>` with the build being deployed, and the example host path with the exact config-folder path already used by the current container.
+
+## Development
+
+Install dependencies:
+
+```sh
+pnpm install --frozen-lockfile
+```
+
+Start the development environment:
+
+```sh
+pnpm dev
+```
+
+Run the CamCore validation checks:
+
+```sh
+pnpm format:check
+pnpm lint
+pnpm typecheck
+pnpm test
+```
+
+Build the production application:
+
+```sh
+pnpm build
+```
+
+Build the container locally:
+
+```sh
+docker build -t camcore-seerr:local .
+```
+
+## Keeping the fork current
+
+The CamCore fork should regularly incorporate security fixes and stable changes from `seerr-team/seerr`.
+
+When updating from upstream:
+
+1. review upstream release notes and migration guidance;
+2. merge upstream `develop` into the CamCore fork with a merge commit, not a squash, so later syncs stay clean. The fork has no `upstream` remote, so fetch it directly: `git fetch https://github.com/seerr-team/seerr.git develop`, then `git merge FETCH_HEAD`;
+3. resolve branding conflicts without removing upstream functionality;
+4. pay particular attention to the small set of CamCore-modified UI and email files;
+5. allow the CamCore validation workflow to complete;
+6. publish the validated CamCore image;
+7. deploy while retaining the existing `/app/config` mapping;
+8. verify the live service, integrations and email delivery;
+9. record material changes in CamCore Operations.
+
+## Support and upstream issues
+
+CamCore-specific deployment, branding, access and operational matters should use [CamCore Support](https://camcore.au/support).
+
+For general Seerr application behaviour, first check the upstream project:
+
+- [Seerr source repository](https://github.com/seerr-team/seerr)
+- [Seerr documentation](https://docs.seerr.dev)
+- [Seerr issue tracker](https://github.com/seerr-team/seerr/issues)
+- [Seerr releases](https://github.com/seerr-team/seerr/releases)
+
+## Credits
+
+The underlying Seerr application is developed and maintained by the [Seerr team](https://github.com/seerr-team) and its open-source contributors.
+
+CamCore maintains the branding, deployment workflow, email communication layer and operational documentation in this fork.
+
+CamCore does not claim ownership of the original Seerr project.
+
+## Licence
+
+This repository remains subject to the upstream [MIT Licence](LICENSE).
